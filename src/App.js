@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Admin, Resource, ListGuesser } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 import { UserList } from "./users";
 import authProvider from "./authProvider";
 import dataProvider from "./dataProvider";
