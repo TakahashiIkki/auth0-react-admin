@@ -1,7 +1,9 @@
 import configJson from "./config.json";
 
-export default {
-    domain: configJson.domain,
-    clientId: configJson.clientId
-};
+const authConfig = {
+    domain: configJson.domain ?? '',
+    clientId: configJson.clientId ?? ''
+}
+
+export default authConfig;
 
