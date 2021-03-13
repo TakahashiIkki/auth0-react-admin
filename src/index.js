@@ -11,8 +11,11 @@ ReactDOM.render(
         domain={authConfig.domain}
         clientId={authConfig.clientId}
         redirectUri={window.location.origin}
+        cacheLocation='localstorage'
     >
-        <App/>
+        <React.StrictMode>
+            <App/>
+        </React.StrictMode>
     </Auth0Provider>,
     document.getElementById('root')
 );
