@@ -1,13 +1,44 @@
-import * as React from "react";
-import { Admin, Resource, ListGuesser } from 'react-admin';
+import React from "react";
+import { Admin, Resource } from 'react-admin';
 import { UserList } from "./users";
-import authProvider from "./authProvider";
 import dataProvider from "./dataProvider";
+import { useAuth0 } from "@auth0/auth0-react";
+import authProvider from "./authProvider";
 
-const App = () => (
-    <Admin dataProvider={dataProvider} authProvider={authProvider}>
-        <Resource name="users" list={UserList}/>
-    </Admin>
-);
+const App = () => {
+    const {
+        isLoading,
+        isAuthenticated,
+        error,
+        loginWithRedirect,
+        logout,
+        getAccessTokenSilently,
+    } = useAuth0();
+
+    const customAuthProvider = authProvider({
+        loginWithRedirect,
+        isAuthenticated,
+        logout,
+        getAccessTokenSilently,
+    });
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Oops... {error.message}</div>;
+    }
+
+    if (isAuthenticated) {
+        return (
+            <Admin dataProvider={dataProvider} authProvider={customAuthProvider}>
+                <Resource name="users" list={UserList}/>
+            </Admin>
+        )
+    } else {
+        return <button onClick={loginWithRedirect}>Log in</button>;
+    }
+}
 
 export default App;
