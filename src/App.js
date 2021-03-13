@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Admin, Resource } from 'react-admin';
 import { UserList } from "./users";
 import dataProvider from "./dataProvider";
