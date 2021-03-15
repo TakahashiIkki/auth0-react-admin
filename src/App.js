@@ -22,6 +22,8 @@ const App = () => {
         getAccessTokenSilently,
     });
 
+    const customDataProvider = dataProvider(getAccessTokenSilently);
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -32,7 +34,7 @@ const App = () => {
 
     if (isAuthenticated) {
         return (
-            <Admin dataProvider={dataProvider} authProvider={customAuthProvider}>
+            <Admin dataProvider={customDataProvider} authProvider={customAuthProvider}>
                 <Resource name="users" list={UserList}/>
             </Admin>
         )
